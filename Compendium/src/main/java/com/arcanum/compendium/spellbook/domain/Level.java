@@ -1,4 +1,4 @@
-package Level;
+package com.arcanum.compendium.spellbook.domain;
 
 public enum Level {
     CANTRIP,

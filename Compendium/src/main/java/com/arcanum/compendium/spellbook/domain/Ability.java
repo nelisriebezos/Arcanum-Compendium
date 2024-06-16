@@ -13,13 +13,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Ability {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
     private String name;
     private String description;
-
 
     @Override
     public int hashCode() {

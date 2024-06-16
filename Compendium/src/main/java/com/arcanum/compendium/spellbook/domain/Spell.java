@@ -1,6 +1,5 @@
 package com.arcanum.compendium.spellbook.domain;
 
-import Level.Level;
 import com.arcanum.compendium.spellbook.service.converter.ComponentConverter;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -8,12 +7,11 @@ import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Spell extends Ability {
     private Level level;
@@ -26,5 +24,16 @@ public class Spell extends Ability {
     private String duration;
     private String higherLevel;
 
-
+    @Builder(builderMethodName = "spellBuilder")
+    public Spell(UUID uuid, String name, String description, Level level, String castingTime, String range, String school, Set<Component> components, String material, String duration, String higherLevel) {
+        super(uuid, name, description);
+        this.level = level;
+        this.castingTime = castingTime;
+        this.range = range;
+        this.school = school;
+        this.components = components;
+        this.material = material;
+        this.duration = duration;
+        this.higherLevel = higherLevel;
+    }
 }
