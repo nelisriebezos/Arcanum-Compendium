@@ -1,7 +1,10 @@
 package com.arcanum.compendium.environment;
 
+import com.arcanum.compendium.environment.dto.SpellDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -9,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -103,6 +107,34 @@ public class Workspace {
         } else {
             logger.warn("File not found: " + fileName);
             throw new IOException("File not found: " + fileName);
+        }
+    }
+
+    public List<SpellDTO> readSpellCasterJson(String path) throws IOException {
+        try {
+            String spellCasterJson = readFile(path);
+            JSONObject jsonObject = new JSONObject(spellCasterJson);
+            JSONObject spells = jsonObject.getJSONObject("spells");
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<SpellDTO> listToReturn = new ArrayList<>();
+
+            for (Iterator<String> it = spells.keys(); it.hasNext(); ) {
+                String key = it.next();
+                spells.getJSONArray(key).forEach(spell -> {
+                    try {
+                        listToReturn.add(objectMapper.readValue(spell.toString(), SpellDTO.class));
+                    } catch (IOException e) {
+                        logger.error("Failed to read spell: " + e.getMessage());
+                    }
+                });
+
+            }
+
+            return listToReturn;
+        } catch (IOException e) {
+            logger.error("Failed to read file " + path + ": \n" + e.getMessage());
+            throw new IOException("Failed to read file " + path + ": \n" + e.getMessage());
         }
     }
 }

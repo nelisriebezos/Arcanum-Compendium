@@ -1,6 +1,6 @@
-package com.arcanum.compendium.spellbook.domain;
+package com.arcanum.compendium.core.player.domain;
 
-public enum Level {
+public enum SpellSlot {
     CANTRIP,
     LEVEL1,
     LEVEL2,

@@ -1,4 +1,4 @@
-package com.arcanum.compendium.spellbook.service.dto;
+package com.arcanum.compendium.environment.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
