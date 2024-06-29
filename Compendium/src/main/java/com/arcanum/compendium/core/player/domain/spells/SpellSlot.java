@@ -1,4 +1,4 @@
-package com.arcanum.compendium.core.player.domain;
+package com.arcanum.compendium.core.player.domain.spells;
 
 public enum SpellSlot {
     CANTRIP,

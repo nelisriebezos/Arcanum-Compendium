@@ -39,4 +39,8 @@ Arcanum Compendium is a comprehensive Dungeons & Dragons (D&D) application desig
 - **Quest Log**: Keep track of active and completed quests, including objectives and rewards.
 - **Player Journal**: Maintain a personal journal for character thoughts, reflections, and other narrative elements.
 
+
+### Notes
+ben bezig met een activate en deactivate funcitonality op item en spell objecten passen dan de character info aan als je een item activeerd. hoef je niet zelf je sheet te updaten, maar word automatisch gedaan.
+kan dan ook een lijst van actieve buffs en debuffs bijhouden.
 ---

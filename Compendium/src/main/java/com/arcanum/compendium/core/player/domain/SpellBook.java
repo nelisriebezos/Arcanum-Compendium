@@ -1,5 +1,7 @@
 package com.arcanum.compendium.core.player.domain;
 
+import com.arcanum.compendium.core.player.domain.spells.Spell;
+import com.arcanum.compendium.core.player.domain.spells.SpellSlot;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

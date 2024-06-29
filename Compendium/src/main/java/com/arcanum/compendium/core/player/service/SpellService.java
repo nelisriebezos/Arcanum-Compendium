@@ -1,7 +1,6 @@
 package com.arcanum.compendium.core.player.service;
 
-import com.arcanum.compendium.core.player.domain.Spell;
-import com.arcanum.compendium.environment.Workspace;
+import com.arcanum.compendium.core.player.domain.spells.Spell;
 import com.arcanum.compendium.core.player.data.SpellRepository;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +14,7 @@ public class SpellService {
 
     private final SpellRepository spellRepository;
 
-    public Spell saveSpell(Spell spell) {
+    public Spell persistSpell(Spell spell) {
         logger.info("Saving spell: " + spell.getUuid());
         return spellRepository.save(spell);
     }

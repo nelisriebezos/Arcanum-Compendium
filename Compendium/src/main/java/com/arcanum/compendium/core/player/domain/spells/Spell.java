@@ -1,5 +1,6 @@
-package com.arcanum.compendium.core.player.domain;
+package com.arcanum.compendium.core.player.domain.spells;
 
+import com.arcanum.compendium.core.player.domain.SpellBook;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,10 +25,15 @@ public class Spell {
     private String castingTime;
     private String range;
     private String duration;
+    @Builder.Default
     private boolean ritual = false;
+    @Builder.Default
     private boolean concentration = false;
+    @Builder.Default
     private boolean verbal = false;
+    @Builder.Default
     private boolean somatic = false;
+    @Builder.Default
     private boolean material = false;
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
