@@ -33,7 +33,6 @@ public class Spell {
     @Builder.Default
     private ArrayList<String> materialComponents = new ArrayList<>();
     private String higherLevelDescription;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private SpellBook spellBook;
 
