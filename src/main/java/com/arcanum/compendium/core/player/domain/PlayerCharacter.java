@@ -1,11 +1,13 @@
 package com.arcanum.compendium.core.player.domain;
 
+import com.arcanum.compendium.core.player.domain.skills.MainStat;
+import com.arcanum.compendium.core.player.domain.skills.Skill;
+import com.arcanum.compendium.core.player.domain.skills.SkillType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -13,12 +15,29 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class PlayerCharacter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
+    private String name;
     @OneToOne
     private Inventory inventory;
-    private int dexModifier;
+    @OneToOne
+    private SpellBook spellBook;
+    @OneToOne
+    private RpSheet rpSheet;
+    @OneToMany
+    private Set<MainStat> mainStats = new HashSet<>();
+    @OneToMany
+    private Set<Skill> skills = new HashSet<>();
+    @OneToOne
+    private HealthStatus healthStatus;
+    private String playerClass;
+    private int speed;
+    private int level;
+    private int proficiencyBonus;
+    private int initiative;
+
 }

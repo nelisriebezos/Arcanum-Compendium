@@ -1,11 +1,10 @@
 package com.arcanum.compendium.core.player.domain;
 
+import com.arcanum.compendium.core.player.domain.skills.SkillType;
 import com.arcanum.compendium.core.player.domain.spells.Spell;
 import com.arcanum.compendium.core.player.domain.spells.SpellSlot;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -14,12 +13,17 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class SpellBook {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-
+    @Builder.Default
+    private SkillType spellCastingAbility = null;
+    private int spellSaveDC;
+    private int spellAttackBonus;
     @OneToMany(fetch = FetchType.EAGER)
     private ArrayList<Spell> spells = new ArrayList<>();
 
@@ -31,7 +35,7 @@ public class SpellBook {
         spells.remove(spell);
     }
 
-    public ArrayList<Spell> getAllSpellsOfType(SpellSlot spellSlot) {
+    public ArrayList<Spell> getAllSpellsOfSpellslot(SpellSlot spellSlot) {
         ArrayList<Spell> filteredList = new ArrayList<>();
         for (Spell spell : spells) {
             if (spell.getSpellSlot() == spellSlot) {

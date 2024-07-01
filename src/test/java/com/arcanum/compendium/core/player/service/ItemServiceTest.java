@@ -107,10 +107,23 @@ class ItemServiceTest {
     }
 
     @Test
-    void getAllItems() {
-    }
-
-    @Test
     void deleteItem() {
+        itemService.persistItem(testItem);
+        itemService.persistItem(testConsumable);
+        itemService.persistItem(testWeapon);
+        itemService.persistItem(testArmor);
+        itemService.persistItem(testMisc);
+        itemService.persistItem(testTool);
+
+        assert itemRepository.findAll().size() == 6;
+
+        itemService.deleteItem(testItem.getUuid());
+        itemService.deleteItem(testConsumable.getUuid());
+        itemService.deleteItem(testWeapon.getUuid());
+        itemService.deleteItem(testArmor.getUuid());
+        itemService.deleteItem(testMisc.getUuid());
+        itemService.deleteItem(testTool.getUuid());
+
+        assert itemRepository.findAll().isEmpty();
     }
 }

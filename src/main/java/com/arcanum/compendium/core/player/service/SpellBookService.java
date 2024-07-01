@@ -1,7 +1,6 @@
 package com.arcanum.compendium.core.player.service;
 
 import com.arcanum.compendium.core.player.data.SpellBookRepository;
-import com.arcanum.compendium.core.player.data.SpellRepository;
 import com.arcanum.compendium.core.player.domain.spells.Spell;
 import com.arcanum.compendium.core.player.domain.SpellBook;
 import com.arcanum.compendium.core.player.service.exception.SpellBookNotFound;
@@ -19,19 +18,25 @@ public class SpellBookService {
     private static final Logger logger = LogManager.getLogger();
 
     private final SpellBookRepository spellBookRepository;
-    private final SpellRepository spellRepository;
+    private final SpellService spellService;
 
-    public SpellBook saveSpellBook(SpellBook spellBook) {
-        logger.info("Saving spellBook: " + spellBook.getUuid());
+    public SpellBook persistSpellBook(SpellBook spellBook) {
+        logger.info("Persisting SpellBook with id: " + spellBook.getUuid());
         return spellBookRepository.save(spellBook);
     }
 
-    public SpellBook addSpellToSpellBook(UUID spellBookId, UUID spellId) {
-        SpellBook spellBook = spellBookRepository.findById(spellBookId)
-                .orElseThrow(() -> new SpellBookNotFound(spellBookId));
-        Spell spell = spellRepository.findById(spellId)
-                .orElseThrow(() -> new SpellNotFound(spellId));
-        spellBook.addSpell(spell);
-        return saveSpellBook(spellBook);
-    }
+//    public SpellBook addSpellToSpellBook(SpellBook spellBook, Spell spell) {
+//        spellBook.addSpell(spell);
+//
+//    }
+//
+//    public SpellBook addSpellToSpellBook(UUID spellBookId, UUID spellId) {
+//        SpellBook spellBook = spellBookRepository.findById(spellBookId)
+//                .orElseThrow(() -> new SpellBookNotFound(spellBookId));
+//
+//        Spell spell = spellRepository.findById(spellId)
+//                .orElseThrow(() -> new SpellNotFound(spellId));
+//        spellBook.addSpell(spell);
+//        return persistSpellBook(spellBook);
+//    }
 }

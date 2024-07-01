@@ -45,9 +45,8 @@ public class Spell {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Spell spell = (Spell) o;
-        return Objects.equals(uuid, spell.uuid);
+        if (!(o instanceof Spell spell)) return false;
+        return ritual == spell.ritual && concentration == spell.concentration && verbal == spell.verbal && somatic == spell.somatic && material == spell.material && Objects.equals(uuid, spell.uuid) && spellSlot == spell.spellSlot && magicSchool == spell.magicSchool && Objects.equals(name, spell.name) && Objects.equals(description, spell.description) && Objects.equals(castingTime, spell.castingTime) && Objects.equals(range, spell.range) && Objects.equals(duration, spell.duration) && Objects.equals(materialComponents, spell.materialComponents) && Objects.equals(higherLevelDescription, spell.higherLevelDescription) && Objects.equals(spellBook, spell.spellBook);
     }
 
     @Override
