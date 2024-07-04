@@ -1,6 +1,6 @@
 package com.arcanum.compendium;
 
-import com.arcanum.compendium.core.player.service.SpellService;
+import com.arcanum.compendium.core.service.SpellService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

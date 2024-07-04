@@ -1,8 +1,9 @@
 package com.arcanum.compendium.core.player.service;
 
-import com.arcanum.compendium.core.player.data.ItemRepository;
-import com.arcanum.compendium.core.player.domain.items.*;
-import com.arcanum.compendium.core.player.domain.items.enums.ArmorType;
+import com.arcanum.compendium.core.data.ItemRepository;
+import com.arcanum.compendium.core.domain.items.*;
+import com.arcanum.compendium.core.domain.items.enums.ArmorType;
+import com.arcanum.compendium.core.service.ItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.arcanum.compendium.core.player.domain.items.enums.WeaponProperty.LIGHT;
+import static com.arcanum.compendium.core.domain.items.enums.WeaponProperty.LIGHT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
