@@ -25,6 +25,7 @@ public class SpellBook {
     private int spellSaveDC;
     private int spellAttackBonus;
     @OneToMany(fetch = FetchType.EAGER)
+    @Builder.Default
     private ArrayList<Spell> spells = new ArrayList<>();
 
     public void addSpell(Spell spell) {

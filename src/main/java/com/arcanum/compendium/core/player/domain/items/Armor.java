@@ -21,15 +21,15 @@ public class Armor extends Item {
     private int donTime;
     private int doffTime;
 
-    public int calculateAC() {
-        return switch (armorType) {
-            case PADDED, STUDDED_LEATHER, LEATHER -> armorClass + getPlayerCharacter().getDexModifier();
-            case HIDE, CHAIN_SHIRT, SCALE_MAIL, BREASTPLATE, HALF_PLATE ->
-                    armorClass + Math.min(2, getPlayerCharacter().getDexModifier());
-            case RING_MAIL, CHAIN_MAIL, SPLINT, PLATE -> armorClass;
-            default -> armorClass;
-        };
-    }
+//    public int calculateAC() {
+//        return switch (armorType) {
+//            case PADDED, STUDDED_LEATHER, LEATHER -> armorClass + getPlayerCharacter().getDexModifier();
+//            case HIDE, CHAIN_SHIRT, SCALE_MAIL, BREASTPLATE, HALF_PLATE ->
+//                    armorClass + Math.min(2, getPlayerCharacter().getDexModifier());
+//            case RING_MAIL, CHAIN_MAIL, SPLINT, PLATE -> armorClass;
+//            default -> armorClass;
+//        };
+//    }
 
     @Override
     public boolean equals(Object o) {

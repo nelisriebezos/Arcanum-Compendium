@@ -28,8 +28,10 @@ public class PlayerCharacter {
     @OneToOne
     private RpSheet rpSheet;
     @OneToMany
+    @Builder.Default
     private Set<MainStat> mainStats = new HashSet<>();
     @OneToMany
+    @Builder.Default
     private Set<Skill> skills = new HashSet<>();
     @OneToOne
     private HealthStatus healthStatus;
