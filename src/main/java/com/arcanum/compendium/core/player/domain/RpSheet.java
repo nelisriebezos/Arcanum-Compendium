@@ -36,5 +36,5 @@ public class RpSheet {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private ArrayList<String> languages = new ArrayList<>();
-    private String alignment;
+    private Alignment alignment;
 }

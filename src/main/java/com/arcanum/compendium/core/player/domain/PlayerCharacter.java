@@ -17,7 +17,6 @@ import java.util.UUID;
 @Entity
 @Builder
 public class PlayerCharacter {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
