@@ -1,13 +1,13 @@
 package com.arcanum.compendium;
 
-import org.springframework.boot.SpringApplication;
+import javafx.application.Application;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        Application.launch(CompendiumApplication.class, args);
     }
 
 }
