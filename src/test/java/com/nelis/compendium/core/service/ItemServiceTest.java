@@ -1,4 +1,4 @@
-package com.nelis.compendium.core.player.service;
+package com.nelis.compendium.core.service;
 
 import com.nelis.compendium.core.data.ItemRepository;
 import com.nelis.compendium.core.domain.items.*;

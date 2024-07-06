@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -26,7 +27,9 @@ public class SpellBook {
     private int spellAttackBonus;
     @OneToMany(fetch = FetchType.EAGER)
     @Builder.Default
-    private ArrayList<Spell> spells = new ArrayList<>();
+    private List<Spell> spells = new ArrayList<>();
+    @OneToOne
+    private PlayerCharacter playerCharacter;
 
     public void addSpell(Spell spell) {
         spells.add(spell);
@@ -49,13 +52,12 @@ public class SpellBook {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SpellBook spellBook = (SpellBook) o;
-        return Objects.equals(uuid, spellBook.uuid);
+        if (!(o instanceof SpellBook spellBook)) return false;
+        return spellSaveDC == spellBook.spellSaveDC && spellAttackBonus == spellBook.spellAttackBonus && Objects.equals(uuid, spellBook.uuid) && spellCastingAbility == spellBook.spellCastingAbility && Objects.equals(spells, spellBook.spells) && Objects.equals(playerCharacter, spellBook.playerCharacter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(uuid);
+        return Objects.hash(uuid, spellCastingAbility, spellSaveDC, spellAttackBonus, spells, playerCharacter);
     }
 }

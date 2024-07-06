@@ -14,7 +14,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ItemService {
     private static final Logger logger = LogManager.getLogger();
-
     private final ItemRepository itemRepository;
 
     public <T extends Item> T persistItem(T item) {

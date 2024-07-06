@@ -1,11 +1,9 @@
 package com.nelis.compendium.core.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -26,4 +24,18 @@ public class HealthStatus {
     private int negDeathSeaves;
     private String hitDice;
     private int availableHitDice;
+    @OneToOne
+    private PlayerCharacter playerCharacter;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HealthStatus that)) return false;
+        return armorClass == that.armorClass && hp == that.hp && maxHp == that.maxHp && tempHp == that.tempHp && posDeathSaves == that.posDeathSaves && negDeathSeaves == that.negDeathSeaves && availableHitDice == that.availableHitDice && Objects.equals(uuid, that.uuid) && Objects.equals(hitDice, that.hitDice) && Objects.equals(playerCharacter, that.playerCharacter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, armorClass, hp, maxHp, tempHp, posDeathSaves, negDeathSeaves, hitDice, availableHitDice, playerCharacter);
+    }
 }

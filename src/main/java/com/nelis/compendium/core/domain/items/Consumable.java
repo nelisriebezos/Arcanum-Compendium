@@ -4,6 +4,7 @@ import com.nelis.compendium.core.domain.Ability;
 import jakarta.persistence.Entity;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class Consumable extends Item implements Ability {
     private String consumableType;
     private String effect;
-    private List<String> tags ;
+    private List<String> tags = new ArrayList<>();
 
     @Override
     public void activate() {
