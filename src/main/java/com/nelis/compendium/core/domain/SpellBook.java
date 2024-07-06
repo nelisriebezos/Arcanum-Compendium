@@ -5,6 +5,7 @@ import com.nelis.compendium.core.domain.spells.SpellSlot;
 import com.nelis.compendium.core.domain.skills.SkillType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,14 +51,18 @@ public class SpellBook {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SpellBook spellBook)) return false;
-        return spellSaveDC == spellBook.spellSaveDC && spellAttackBonus == spellBook.spellAttackBonus && Objects.equals(uuid, spellBook.uuid) && spellCastingAbility == spellBook.spellCastingAbility && Objects.equals(spells, spellBook.spells) && Objects.equals(playerCharacter, spellBook.playerCharacter);
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        SpellBook spellBook = (SpellBook) o;
+        return getUuid() != null && Objects.equals(getUuid(), spellBook.getUuid());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(uuid, spellCastingAbility, spellSaveDC, spellAttackBonus, spells, playerCharacter);
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

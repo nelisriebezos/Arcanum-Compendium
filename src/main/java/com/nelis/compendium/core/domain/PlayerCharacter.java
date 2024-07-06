@@ -4,6 +4,7 @@ import com.nelis.compendium.core.domain.skills.MainStat;
 import com.nelis.compendium.core.domain.skills.Skill;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -55,14 +56,18 @@ public class PlayerCharacter {
     private int initiative;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PlayerCharacter that)) return false;
-        return speed == that.speed && level == that.level && proficiencyBonus == that.proficiencyBonus && initiative == that.initiative && Objects.equals(uuid, that.uuid) && Objects.equals(name, that.name) && Objects.equals(inventory, that.inventory) && Objects.equals(spellBook, that.spellBook) && Objects.equals(rpSheet, that.rpSheet) && Objects.equals(mainStats, that.mainStats) && Objects.equals(skills, that.skills) && Objects.equals(healthStatus, that.healthStatus) && Objects.equals(playerClass, that.playerClass);
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        PlayerCharacter student = (PlayerCharacter) o;
+        return getUuid() != null && Objects.equals(getUuid(), student.getUuid());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(uuid, name, inventory, spellBook, rpSheet, mainStats, skills, healthStatus, playerClass, speed, level, proficiencyBonus, initiative);
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

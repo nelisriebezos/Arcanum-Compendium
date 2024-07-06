@@ -2,6 +2,7 @@ package com.nelis.compendium.core.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -28,14 +29,18 @@ public class HealthStatus {
     private PlayerCharacter playerCharacter;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof HealthStatus that)) return false;
-        return armorClass == that.armorClass && hp == that.hp && maxHp == that.maxHp && tempHp == that.tempHp && posDeathSaves == that.posDeathSaves && negDeathSeaves == that.negDeathSeaves && availableHitDice == that.availableHitDice && Objects.equals(uuid, that.uuid) && Objects.equals(hitDice, that.hitDice) && Objects.equals(playerCharacter, that.playerCharacter);
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        HealthStatus healthStatus = (HealthStatus) o;
+        return getUuid() != null && Objects.equals(getUuid(), healthStatus.getUuid());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(uuid, armorClass, hp, maxHp, tempHp, posDeathSaves, negDeathSeaves, hitDice, availableHitDice, playerCharacter);
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }

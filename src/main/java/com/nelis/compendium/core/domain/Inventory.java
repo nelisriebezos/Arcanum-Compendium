@@ -2,6 +2,7 @@ package com.nelis.compendium.core.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -20,15 +21,18 @@ public class Inventory {
     private PlayerCharacter playerCharacter;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Inventory inventory)) return false;
-        return Objects.equals(uuid, inventory.uuid) && Objects.equals(playerCharacter, inventory.playerCharacter);
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        Inventory inventory = (Inventory) o;
+        return getUuid() != null && Objects.equals(getUuid(), inventory.getUuid());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(uuid, playerCharacter);
+    public final int hashCode() {
+        return getClass().hashCode();
     }
-
 }

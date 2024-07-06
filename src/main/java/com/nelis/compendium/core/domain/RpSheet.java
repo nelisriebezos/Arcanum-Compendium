@@ -2,6 +2,7 @@ package com.nelis.compendium.core.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +44,18 @@ public class RpSheet {
     private PlayerCharacter playerCharacter;
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof RpSheet rpSheet)) return false;
-        return weight == rpSheet.weight && height == rpSheet.height && age == rpSheet.age && Objects.equals(uuid, rpSheet.uuid) && Objects.equals(race, rpSheet.race) && Objects.equals(personalityTraits, rpSheet.personalityTraits) && Objects.equals(ideals, rpSheet.ideals) && Objects.equals(bonds, rpSheet.bonds) && Objects.equals(flaws, rpSheet.flaws) && Objects.equals(eyeColour, rpSheet.eyeColour) && Objects.equals(backstory, rpSheet.backstory) && Objects.equals(hairColour, rpSheet.hairColour) && Objects.equals(organizations, rpSheet.organizations) && Objects.equals(skinColour, rpSheet.skinColour) && Objects.equals(languages, rpSheet.languages) && alignment == rpSheet.alignment && Objects.equals(playerCharacter, rpSheet.playerCharacter);
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        RpSheet student = (RpSheet) o;
+        return getUuid() != null && Objects.equals(getUuid(), student.getUuid());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(uuid, race, personalityTraits, ideals, bonds, flaws, eyeColour, backstory, hairColour, organizations, skinColour, weight, height, age, languages, alignment, playerCharacter);
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }
