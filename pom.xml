@@ -9,7 +9,7 @@
         <version>3.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.arcanum</groupId>
+    <groupId>com.nelis</groupId>
     <artifactId>compendium</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Compendium</name>
