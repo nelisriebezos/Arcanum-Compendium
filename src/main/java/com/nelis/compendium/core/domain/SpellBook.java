@@ -26,7 +26,7 @@ public class SpellBook {
     private SkillType spellCastingAbility = null;
     private int spellSaveDC;
     private int spellAttackBonus;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @Builder.Default
     private List<Spell> spells = new ArrayList<>();
     @OneToOne

@@ -23,30 +23,24 @@ public class PlayerCharacter {
     private UUID uuid;
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
 
-    @OneToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private SpellBook spellBook;
 
-    @OneToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private RpSheet rpSheet;
 
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @Builder.Default
     private Set<MainStat> mainStats = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @Builder.Default
     private Set<Skill> skills = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private HealthStatus healthStatus;
 
     private String playerClass;

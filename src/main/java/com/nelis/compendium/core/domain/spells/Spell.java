@@ -35,11 +35,11 @@ public class Spell {
     private boolean somatic = false;
     @Builder.Default
     private boolean material = false;
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     @Builder.Default
     private ArrayList<String> materialComponents = new ArrayList<>();
     private String higherLevelDescription;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private SpellBook spellBook;
 
     @Override
