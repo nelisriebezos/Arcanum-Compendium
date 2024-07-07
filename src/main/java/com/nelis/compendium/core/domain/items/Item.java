@@ -22,4 +22,7 @@ public class Item {
     private String name;
     private int amount;
     private String description;
+    @ManyToOne
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory;
 }

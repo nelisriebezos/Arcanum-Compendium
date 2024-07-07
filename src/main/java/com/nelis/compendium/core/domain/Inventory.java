@@ -21,23 +21,28 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "inventory")
     @Builder.Default
     private List<Weapon> weapons = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "inventory")
     @Builder.Default
     private List<Armor> armor = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "inventory")
     @Builder.Default
     private List<Consumable> consumables = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "inventory")
     @Builder.Default
     private List<Misc> Miscellaneous = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "inventory")
     @Builder.Default
     private List<Tool> tools = new ArrayList<>();
     private int copper;
