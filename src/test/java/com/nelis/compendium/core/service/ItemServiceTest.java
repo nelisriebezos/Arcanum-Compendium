@@ -1,6 +1,6 @@
 package com.nelis.compendium.core.service;
 
-import com.nelis.compendium.core.data.ArmorRepository;
+import com.nelis.compendium.core.data.*;
 import com.nelis.compendium.core.domain.items.*;
 import com.nelis.compendium.core.domain.items.enums.ArmorType;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +26,15 @@ class ItemServiceTest {
 
     @Autowired
     private ArmorRepository armorRepository;
+    @Autowired
+    private ConsumableRepository consumableRepository;
+    @Autowired
+    private MiscRepository miscRepository;
+    @Autowired
+    private ToolRepository toolRepository;
+    @Autowired
+    private WeaponRepository weaponRepository;
+
 
     private Consumable testConsumable;
     private Weapon testWeapon;
@@ -36,6 +45,10 @@ class ItemServiceTest {
     @BeforeEach
     void setUp() {
         armorRepository.deleteAll();
+        consumableRepository.deleteAll();
+        miscRepository.deleteAll();
+        toolRepository.deleteAll();
+        weaponRepository.deleteAll();
 
         testConsumable = Consumable.consumableBuilder()
                 .build();
@@ -101,7 +114,7 @@ class ItemServiceTest {
     void deleteConsumable() {
         Consumable persistedConsumable = itemService.persistConsumable(testConsumable);
         itemService.deleteConsumable(persistedConsumable.getUuid());
-        assertEquals(0, armorRepository.count());
+        assertEquals(0, consumableRepository.count());
     }
 
     @Test
@@ -121,7 +134,7 @@ class ItemServiceTest {
     void deleteMisc() {
         Misc persistedMisc = itemService.persistMisc(testMisc);
         itemService.deleteMisc(persistedMisc.getUuid());
-        assertEquals(0, armorRepository.count());
+        assertEquals(0, miscRepository.count());
     }
 
     @Test
@@ -141,7 +154,7 @@ class ItemServiceTest {
     void deleteTool() {
         Tool persistedTool = itemService.persistTool(testTool);
         itemService.deleteTool(persistedTool.getUuid());
-        assertEquals(0, armorRepository.count());
+        assertEquals(0, toolRepository.count());
     }
 
     @Test
@@ -161,6 +174,6 @@ class ItemServiceTest {
     void deleteWeapon() {
         Weapon persistedWeapon = itemService.persistWeapon(testWeapon);
         itemService.deleteWeapon(persistedWeapon.getUuid());
-        assertEquals(0, armorRepository.count());
+        assertEquals(0, weaponRepository.count());
     }
 }
