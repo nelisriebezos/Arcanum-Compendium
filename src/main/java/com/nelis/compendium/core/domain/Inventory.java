@@ -40,10 +40,11 @@ public class Inventory {
     @OneToMany(cascade = CascadeType.ALL)
     @Builder.Default
     private List<Tool> tools = new ArrayList<>();
-
-//    @OneToOne
-//    @JoinColumn(name = "player_character_id")
-//    private PlayerCharacter playerCharacter;
+    private int copper;
+    private int silver;
+    private int electrum;
+    private int gold;
+    private int platinum;
 
     @Override
     public final boolean equals(Object o) {

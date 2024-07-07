@@ -81,7 +81,6 @@ class PlayerCharacterServiceTest {
 //        testPlayerCharacter.setSkills(Set.of(testSkill));
 //        testPlayerCharacter.setHealthStatus(testHealthStatus);
 
-        System.out.println("Finished the setup\n");
     }
 
     @Test
@@ -115,5 +114,10 @@ class PlayerCharacterServiceTest {
 
     @Test
     void deletePlayerCharacter() {
+        testPlayerCharacter = playerCharacterService.persistPlayerCharacter(testPlayerCharacter);
+        playerCharacterService.deletePlayerCharacter(testPlayerCharacter.getUuid());
+
+        assertEquals(0, playerCharacterRepository.count());
+        assertEquals(0, inventoryRepository.count());
     }
 }
