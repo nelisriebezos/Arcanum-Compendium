@@ -18,6 +18,7 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
     @OneToOne
+    @JoinColumn(name = "player_character_id")
     private PlayerCharacter playerCharacter;
 
     @Override

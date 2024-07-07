@@ -1,7 +1,5 @@
 package com.nelis.compendium.core.domain;
 
-import com.nelis.compendium.core.domain.skills.MainSkill;
-import com.nelis.compendium.core.domain.skills.Skill;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -23,12 +21,14 @@ public class PlayerCharacter {
     private UUID uuid;
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,
+            mappedBy = "playerCharacter")
     private Inventory inventory;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private SpellBook spellBook;
-//
+    @OneToOne(cascade = CascadeType.ALL,
+            mappedBy = "playerCharacter")
+    private SpellBook spellBook;
+
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private RpSheet rpSheet;
 //
@@ -65,5 +65,6 @@ public class PlayerCharacter {
     public final int hashCode() {
         return this instanceof HibernateProxy
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
-                : getClass().hashCode();     }
+                : getClass().hashCode();
+    }
 }

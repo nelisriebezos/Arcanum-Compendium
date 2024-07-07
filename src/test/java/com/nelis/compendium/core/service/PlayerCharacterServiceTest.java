@@ -80,6 +80,8 @@ class PlayerCharacterServiceTest {
 //        testPlayerCharacter.setMainStats(Set.of(testMainStat));
 //        testPlayerCharacter.setSkills(Set.of(testSkill));
 //        testPlayerCharacter.setHealthStatus(testHealthStatus);
+
+        System.out.println("Finished the setup\n");
     }
 
     @Test
