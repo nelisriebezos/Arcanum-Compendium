@@ -20,6 +20,7 @@ public class MainSkill {
     private UUID uuid;
     @Enumerated(EnumType.STRING)
     private SkillType name;
+    @Column(name = "main_skill_value")
     private int value;
     private int modifier;
     @ManyToOne
