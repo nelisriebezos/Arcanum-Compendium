@@ -22,7 +22,7 @@ public class HealthStatus {
     private int maxHp;
     private int tempHp;
     private int posDeathSaves;
-    private int negDeathSeaves;
+    private int negDeathSaves;
     private String hitDice;
     private int availableHitDice;
 

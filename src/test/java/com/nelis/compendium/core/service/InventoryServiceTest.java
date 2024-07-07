@@ -26,16 +26,6 @@ class InventoryServiceTest {
     private InventoryService inventoryService;
     @Autowired
     private InventoryRepository inventoryRepository;
-    @Autowired
-    private ArmorRepository armorRepository;
-    @Autowired
-    private ConsumableRepository consumableRepository;
-    @Autowired
-    private MiscRepository miscRepository;
-    @Autowired
-    private ToolRepository toolRepository;
-    @Autowired
-    private WeaponRepository weaponRepository;
 
     private Inventory testInventory;
 

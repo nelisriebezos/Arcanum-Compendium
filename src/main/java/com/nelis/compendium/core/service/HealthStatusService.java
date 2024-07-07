@@ -16,9 +16,9 @@ public class HealthStatusService {
     private final Logger logger = LogManager.getLogger();
     private final HealthStatusRepository healthStatusRepository;
 
-    public void persistHealthStatus(HealthStatus healthStatus) {
+    public HealthStatus persistHealthStatus(HealthStatus healthStatus) {
         logger.info("Persisting HealthStatus with id: " + healthStatus.getUuid());
-        healthStatusRepository.save(healthStatus);
+        return healthStatusRepository.save(healthStatus);
     }
 
     public HealthStatus getHealthStatusById(UUID id) {
