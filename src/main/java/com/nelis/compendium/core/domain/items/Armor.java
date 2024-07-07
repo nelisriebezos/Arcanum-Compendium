@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
@@ -35,16 +36,20 @@ public class Armor extends Item {
 //    }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
         Armor armor = (Armor) o;
-        return armorClass == armor.armorClass && isProficient == armor.isProficient && minimumStrRequired == armor.minimumStrRequired && stealthDisadvantage == armor.stealthDisadvantage && donTime == armor.donTime && doffTime == armor.doffTime && armorType == armor.armorType;
+        return getUuid() != null && Objects.equals(getUuid(), armor.getUuid());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), armorClass, isProficient, armorType, minimumStrRequired, stealthDisadvantage, donTime, doffTime);
+    public final int hashCode() {
+        return this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
+                : getClass().hashCode();
     }
 }
