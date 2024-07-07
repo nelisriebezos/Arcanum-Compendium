@@ -1,5 +1,6 @@
 package com.nelis.compendium.core.domain;
 
+import com.nelis.compendium.core.domain.skills.MainSkill;
 import com.nelis.compendium.core.domain.skills.Skill;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,22 +26,23 @@ public class PlayerCharacter {
     @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private SpellBook spellBook;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private RpSheet rpSheet;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @Builder.Default
-    private Set<MainStat> mainStats = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @Builder.Default
-    private Set<Skill> skills = new HashSet<>();
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private HealthStatus healthStatus;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private SpellBook spellBook;
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private RpSheet rpSheet;
+//
+//    @OneToMany(cascade = CascadeType.ALL,
+//    mappedBy = "playerCharacter")
+//    @Builder.Default
+//    private Set<MainSkill> mainStats = new HashSet<>();
+//
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @Builder.Default
+//    private Set<Skill> skills = new HashSet<>();
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private HealthStatus healthStatus;
 
     private String playerClass;
     private int speed;
