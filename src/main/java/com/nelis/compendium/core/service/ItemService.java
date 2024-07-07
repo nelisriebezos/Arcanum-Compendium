@@ -2,7 +2,7 @@ package com.nelis.compendium.core.service;
 
 import com.nelis.compendium.core.data.*;
 import com.nelis.compendium.core.domain.items.*;
-import com.nelis.compendium.core.service.exception.ItemNotFound;
+import com.nelis.compendium.core.service.exception.*;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +27,7 @@ public class ItemService {
 
     public Armor getArmorById(UUID id) {
         logger.info("Retrieving Armor with id: " + id);
-        return armorRepository.findById(id).orElseThrow(() -> new ItemNotFound(id));
+        return armorRepository.findById(id).orElseThrow(() -> new ArmorNotFound(id));
     }
 
     public void deleteArmor(UUID id) {
@@ -42,7 +42,7 @@ public class ItemService {
 
     public Consumable getConsumableById(UUID id) {
         logger.info("Retrieving Consumable with id: " + id);
-        return consumableRepository.findById(id).orElseThrow(() -> new ItemNotFound(id));
+        return consumableRepository.findById(id).orElseThrow(() -> new ConsumableNotFound(id));
     }
 
     public void deleteConsumable(UUID id) {
@@ -57,7 +57,7 @@ public class ItemService {
 
     public Misc getMiscById(UUID id) {
         logger.info("Retrieving Misc with id: " + id);
-        return miscRepository.findById(id).orElseThrow(() -> new ItemNotFound(id));
+        return miscRepository.findById(id).orElseThrow(() -> new MiscNotFound(id));
     }
 
     public void deleteMisc(UUID id) {
@@ -72,7 +72,7 @@ public class ItemService {
 
     public Tool getToolById(UUID id) {
         logger.info("Retrieving Tool with id: " + id);
-        return toolRepository.findById(id).orElseThrow(() -> new ItemNotFound(id));
+        return toolRepository.findById(id).orElseThrow(() -> new ToolNotFound(id));
     }
 
     public void deleteTool(UUID id) {
@@ -87,7 +87,7 @@ public class ItemService {
 
     public Weapon getWeaponById(UUID id) {
         logger.info("Retrieving Weapon with id: " + id);
-        return weaponRepository.findById(id).orElseThrow(() -> new ItemNotFound(id));
+        return weaponRepository.findById(id).orElseThrow(() -> new WeaponNotFound(id));
     }
 
     public void deleteWeapon(UUID id) {

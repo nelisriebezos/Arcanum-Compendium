@@ -3,6 +3,7 @@ package com.nelis.compendium.core.service;
 import com.nelis.compendium.core.data.*;
 import com.nelis.compendium.core.domain.items.*;
 import com.nelis.compendium.core.domain.items.enums.ArmorType;
+import com.nelis.compendium.core.service.exception.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,9 +14,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static com.nelis.compendium.core.domain.items.enums.WeaponProperty.LIGHT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -91,6 +94,11 @@ class ItemServiceTest {
     }
 
     @Test
+    void getArmorByIdNotFound() {
+        assertThrows(ArmorNotFound.class, () -> itemService.getArmorById(UUID.randomUUID()));
+    }
+
+    @Test
     void deleteArmor() {
         Armor persistedArmor = itemService.persistArmor(testArmor);
         itemService.deleteArmor(persistedArmor.getUuid());
@@ -108,6 +116,11 @@ class ItemServiceTest {
         Consumable persistedConsumable = itemService.persistConsumable(testConsumable);
         Consumable retrievedConsumable = itemService.getConsumableById(persistedConsumable.getUuid());
         assertEquals(persistedConsumable, retrievedConsumable);
+    }
+
+    @Test
+    void getConsumableByIdNotFound() {
+        assertThrows(ConsumableNotFound.class, () -> itemService.getConsumableById(UUID.randomUUID()));
     }
 
     @Test
@@ -131,6 +144,11 @@ class ItemServiceTest {
     }
 
     @Test
+    void getMiscByIdNotFound() {
+        assertThrows(MiscNotFound.class, () -> itemService.getMiscById(UUID.randomUUID()));
+    }
+
+    @Test
     void deleteMisc() {
         Misc persistedMisc = itemService.persistMisc(testMisc);
         itemService.deleteMisc(persistedMisc.getUuid());
@@ -151,6 +169,11 @@ class ItemServiceTest {
     }
 
     @Test
+    void getToolByIdNotFound() {
+        assertThrows(ToolNotFound.class, () -> itemService.getToolById(UUID.randomUUID()));
+    }
+
+    @Test
     void deleteTool() {
         Tool persistedTool = itemService.persistTool(testTool);
         itemService.deleteTool(persistedTool.getUuid());
@@ -168,6 +191,11 @@ class ItemServiceTest {
         Weapon persistedWeapon = itemService.persistWeapon(testWeapon);
         Weapon retrievedWeapon = itemService.getWeaponById(persistedWeapon.getUuid());
         assertEquals(persistedWeapon, retrievedWeapon);
+    }
+
+    @Test
+    void getWeaponByIdNotFound() {
+        assertThrows(WeaponNotFound.class, () -> itemService.getWeaponById(UUID.randomUUID()));
     }
 
     @Test
