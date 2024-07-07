@@ -19,6 +19,7 @@ public class RpSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
+    private String name;
     private String race;
     @ElementCollection
     @Builder.Default

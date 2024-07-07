@@ -19,7 +19,6 @@ public class PlayerCharacter {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-    private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
@@ -51,6 +50,10 @@ public class PlayerCharacter {
     private int level;
     private int proficiencyBonus;
     private int initiative;
+
+    public String getName() {
+        return rpSheet.getName();
+    }
 
     @Override
     public final boolean equals(Object o) {
