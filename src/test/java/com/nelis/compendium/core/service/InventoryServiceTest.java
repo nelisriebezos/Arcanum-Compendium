@@ -83,6 +83,7 @@ class InventoryServiceTest {
         Inventory inventory = inventoryService.persistInventory(testInventory);
         assertNotNull(inventory);
         assertNotNull(inventory.getUuid());
+        assertEquals(testInventory, inventory);
         assertEquals(testInventory.getConsumables().size(), inventory.getConsumables().size());
         assertEquals(testInventory.getWeapons().size(), inventory.getWeapons().size());
         assertEquals(testInventory.getArmor().size(), inventory.getArmor().size());

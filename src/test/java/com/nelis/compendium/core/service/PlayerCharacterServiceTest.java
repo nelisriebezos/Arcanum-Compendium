@@ -2,6 +2,7 @@ package com.nelis.compendium.core.service;
 
 import com.nelis.compendium.core.data.*;
 import com.nelis.compendium.core.domain.*;
+import com.nelis.compendium.core.domain.spells.Spell;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,8 +26,8 @@ class PlayerCharacterServiceTest {
     private PlayerCharacterRepository playerCharacterRepository;
     @Autowired
     private InventoryRepository inventoryRepository;
-//    @Autowired
-//    private SpellBookRepository spellBookRepository;
+    @Autowired
+    private SpellRepository spellRepository;
 //    @Autowired
 //    private RpSheetRepository rpSheetRepository;
 //    @Autowired
@@ -39,9 +41,10 @@ class PlayerCharacterServiceTest {
 
     @BeforeEach
     void setUp() {
+        spellRepository.deleteAll();
+
         playerCharacterRepository.deleteAll();
-        inventoryRepository.deleteAll();
-//        spellBookRepository.deleteAll();
+//        inventoryRepository.deleteAll();
 //        rpSheetRepository.deleteAll();
 //        skillRepository.deleteAll();
 //        healthStatusRepository.deleteAll();
@@ -51,13 +54,13 @@ class PlayerCharacterServiceTest {
                 .build();
 
         Inventory testInventory = Inventory.builder()
-//                .playerCharacter(testPlayerCharacter)
+                .gold(100)
                 .build();
 
-//        SpellBook testSpellBook = SpellBook.builder()
-//                .playerCharacter(testPlayerCharacter)
-//                .build();
-//
+        Spell testSpell = Spell.builder()
+                .name("Test Spell")
+                .build();
+
 //        RpSheet testRpSheet = RpSheet.builder()
 //                .playerCharacter(testPlayerCharacter)
 //                .build();
@@ -74,27 +77,27 @@ class PlayerCharacterServiceTest {
 //                .playerCharacter(testPlayerCharacter)
 //                .build();
 
+        testSpell = spellRepository.save(testSpell);
+
         testPlayerCharacter.setInventory(testInventory);
+        testPlayerCharacter.setSpells(List.of(testSpell));
 //        testPlayerCharacter.setSpellBook(testSpellBook);
 //        testPlayerCharacter.setRpSheet(testRpSheet);
 //        testPlayerCharacter.setMainStats(Set.of(testMainStat));
 //        testPlayerCharacter.setSkills(Set.of(testSkill));
 //        testPlayerCharacter.setHealthStatus(testHealthStatus);
 
+
     }
 
     @Test
     void persistPlayerCharacter() {
-        testPlayerCharacter = playerCharacterService.persistPlayerCharacter(testPlayerCharacter);
-        assertNotNull(playerCharacterRepository.findById(testPlayerCharacter.getUuid()));
-        assertNotNull(inventoryRepository.findById(testPlayerCharacter.getInventory().getUuid()));
-
-
-//        assertNotNull(spellBookRepository.findById(testPlayerCharacter.getSpellBook().getUuid()));
-//        assertNotNull(rpSheetRepository.findById(testPlayerCharacter.getRpSheet().getUuid()));
-//        assertNotNull(mainStatRepository.findById(testPlayerCharacter.getMainStats().iterator().next().getUuid()));
-//        assertNotNull(skillRepository.findById(testPlayerCharacter.getSkills().iterator().next().getUuid()));
-//        assertNotNull(healthStatusRepository.findById(testPlayerCharacter.getHealthStatus().getUuid()));
+        PlayerCharacter playerCharacter = playerCharacterService.persistPlayerCharacter(testPlayerCharacter);
+        assertNotNull(playerCharacter);
+        assertNotNull(playerCharacter.getUuid());
+        assertEquals(testPlayerCharacter, playerCharacter);
+        assertEquals(testPlayerCharacter.getInventory(), playerCharacter.getInventory());
+        assertEquals(testPlayerCharacter.getSpells(), playerCharacter.getSpells());
     }
 
     @Test
