@@ -51,7 +51,7 @@ class PlayerCharacterServiceTest {
                 .build();
 
         Inventory testInventory = Inventory.builder()
-                .playerCharacter(testPlayerCharacter)
+//                .playerCharacter(testPlayerCharacter)
                 .build();
 
 //        SpellBook testSpellBook = SpellBook.builder()

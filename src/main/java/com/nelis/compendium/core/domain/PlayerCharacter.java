@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
@@ -21,13 +18,12 @@ public class PlayerCharacter {
     private UUID uuid;
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            mappedBy = "playerCharacter")
+    @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            mappedBy = "playerCharacter")
-    private SpellBook spellBook;
+//    @OneToMany
+//    @Builder.Default
+//    private List<Spell> spells = new ArrayList<>();
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private RpSheet rpSheet;
