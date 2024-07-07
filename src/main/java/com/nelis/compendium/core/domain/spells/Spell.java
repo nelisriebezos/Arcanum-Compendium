@@ -19,6 +19,7 @@ public class Spell {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
     private SpellSlot spellSlot;
+    @Enumerated(EnumType.STRING)
     private MagicSchool magicSchool;
     private String name;
     private String description;

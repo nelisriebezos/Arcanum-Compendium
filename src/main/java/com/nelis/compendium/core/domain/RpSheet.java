@@ -56,6 +56,7 @@ public class RpSheet {
 
     @Override
     public final int hashCode() {
-        return getClass().hashCode();
-    }
+        return this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
+                : getClass().hashCode();     }
 }

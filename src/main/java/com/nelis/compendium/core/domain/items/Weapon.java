@@ -1,9 +1,7 @@
 package com.nelis.compendium.core.domain.items;
 
 import com.nelis.compendium.core.domain.items.enums.WeaponProperty;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -21,6 +19,7 @@ public class Weapon extends Item {
     private String damageType;
     private boolean isProficient;
     @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     private List<WeaponProperty> properties = new ArrayList<>();
 

@@ -2,6 +2,8 @@ package com.nelis.compendium.core.domain.items;
 
 import com.nelis.compendium.core.domain.items.enums.ArmorType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 
 import java.util.Objects;
@@ -15,6 +17,7 @@ import java.util.Objects;
 public class Armor extends Item {
     private int armorClass;
     private boolean isProficient;
+    @Enumerated(EnumType.STRING)
     private ArmorType armorType;
     private int minimumStrRequired;
     private boolean stealthDisadvantage;

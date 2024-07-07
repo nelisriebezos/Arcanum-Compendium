@@ -20,6 +20,7 @@ public class Skill {
     private UUID uuid;
     private String name;
     private int modifier;
+    @Enumerated(EnumType.STRING)
     private SkillType skillType;
     private boolean isSavingThrow;
     private boolean isProficient;

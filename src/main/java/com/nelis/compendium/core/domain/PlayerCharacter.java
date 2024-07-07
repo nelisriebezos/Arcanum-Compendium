@@ -1,6 +1,5 @@
 package com.nelis.compendium.core.domain;
 
-import com.nelis.compendium.core.domain.skills.MainStat;
 import com.nelis.compendium.core.domain.skills.Skill;
 import jakarta.persistence.*;
 import lombok.*;
@@ -62,6 +61,7 @@ public class PlayerCharacter {
 
     @Override
     public final int hashCode() {
-        return getClass().hashCode();
-    }
+        return this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
+                : getClass().hashCode();     }
 }

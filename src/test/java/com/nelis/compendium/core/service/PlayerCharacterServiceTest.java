@@ -32,14 +32,11 @@ class PlayerCharacterServiceTest {
     @Autowired
     private SkillRepository skillRepository;
     @Autowired
+    private MainSkillRepository mainSkillRepository;
+    @Autowired
     private HealthStatusRepository healthStatusRepository;
 
     private PlayerCharacter testPlayerCharacter;
-    private Inventory testInventory;
-    private SpellBook testSpellBook;
-    private RpSheet testRpSheet;
-    private Skill testSkill;
-    private HealthStatus testHealthStatus;
 
     @BeforeEach
     void setUp() {
@@ -54,29 +51,34 @@ class PlayerCharacterServiceTest {
                 .name("Test PlayerCharacter")
                 .build();
 
-        testInventory = Inventory.builder()
+        Inventory testInventory = Inventory.builder()
                 .playerCharacter(testPlayerCharacter)
                 .build();
 
-        testSpellBook = SpellBook.builder()
+        SpellBook testSpellBook = SpellBook.builder()
                 .playerCharacter(testPlayerCharacter)
                 .build();
 
-        testRpSheet = RpSheet.builder()
+        RpSheet testRpSheet = RpSheet.builder()
                 .playerCharacter(testPlayerCharacter)
                 .build();
 
-        testSkill = Skill.builder()
+//        MainStat testMainStat = MainStat.builder()
+//                .playerCharacter(testPlayerCharacter)
+//                .build();
+
+        Skill testSkill = Skill.builder()
                 .playerCharacter(testPlayerCharacter)
                 .build();
 
-        testHealthStatus = HealthStatus.builder()
+        HealthStatus testHealthStatus = HealthStatus.builder()
                 .playerCharacter(testPlayerCharacter)
                 .build();
 
         testPlayerCharacter.setInventory(testInventory);
         testPlayerCharacter.setSpellBook(testSpellBook);
         testPlayerCharacter.setRpSheet(testRpSheet);
+//        testPlayerCharacter.setMainStats(Set.of(testMainStat));
         testPlayerCharacter.setSkills(Set.of(testSkill));
         testPlayerCharacter.setHealthStatus(testHealthStatus);
     }
@@ -88,12 +90,23 @@ class PlayerCharacterServiceTest {
         assertNotNull(inventoryRepository.findById(testPlayerCharacter.getInventory().getUuid()));
         assertNotNull(spellBookRepository.findById(testPlayerCharacter.getSpellBook().getUuid()));
         assertNotNull(rpSheetRepository.findById(testPlayerCharacter.getRpSheet().getUuid()));
+//        assertNotNull(mainStatRepository.findById(testPlayerCharacter.getMainStats().iterator().next().getUuid()));
         assertNotNull(skillRepository.findById(testPlayerCharacter.getSkills().iterator().next().getUuid()));
         assertNotNull(healthStatusRepository.findById(testPlayerCharacter.getHealthStatus().getUuid()));
     }
 
     @Test
     void getPlayerCharacterById() {
+        testPlayerCharacter = playerCharacterService.persistPlayerCharacter(testPlayerCharacter);
+
+        PlayerCharacter fetchedCharacter = playerCharacterService.getPlayerCharacterById(testPlayerCharacter.getUuid());
+        assertEquals(testPlayerCharacter, fetchedCharacter);
+        assertEquals(testPlayerCharacter.getInventory(), fetchedCharacter.getInventory());
+        assertEquals(testPlayerCharacter.getSpellBook(), fetchedCharacter.getSpellBook());
+        assertEquals(testPlayerCharacter.getRpSheet(), fetchedCharacter.getRpSheet());
+//        assertEquals(testPlayerCharacter.getMainStats(), fetchedCharacter.getMainStats());
+        assertEquals(testPlayerCharacter.getSkills(), fetchedCharacter.getSkills());
+        assertEquals(testPlayerCharacter.getHealthStatus(), fetchedCharacter.getHealthStatus());
     }
 
     @Test
