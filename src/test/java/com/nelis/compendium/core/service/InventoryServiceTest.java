@@ -97,16 +97,4 @@ class InventoryServiceTest {
         Inventory retrievedInventory = inventoryService.getInventoryById(inventory.getUuid());
         assertEquals(inventory, retrievedInventory);
     }
-
-    @Test
-    void deleteInventory() {
-        Inventory inventory = inventoryService.persistInventory(testInventory);
-        inventoryService.deleteInventory(inventory.getUuid());
-        assertFalse(inventoryRepository.findById(inventory.getUuid()).isPresent());
-        assertEquals(0, armorRepository.count());
-        assertEquals(0, consumableRepository.count());
-        assertEquals(0, miscRepository.count());
-        assertEquals(0, toolRepository.count());
-        assertEquals(0, weaponRepository.count());
-    }
 }

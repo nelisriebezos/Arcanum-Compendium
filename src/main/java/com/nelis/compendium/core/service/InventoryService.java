@@ -25,9 +25,4 @@ public class InventoryService {
         logger.info("Retrieving Inventory with id: " + id);
         return inventoryRepository.findById(id).orElseThrow(() -> new InventoryNotFound(id));
     }
-
-    public void deleteInventory(UUID id) {
-        logger.info("Deleting Inventory with id: " + id);
-        inventoryRepository.deleteById(id);
-    }
 }
