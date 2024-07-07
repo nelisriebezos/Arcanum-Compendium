@@ -1,5 +1,6 @@
 package com.nelis.compendium.core.domain;
 
+import com.nelis.compendium.core.domain.spells.Spell;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -21,9 +22,9 @@ public class PlayerCharacter {
     @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
 
-//    @OneToMany
-//    @Builder.Default
-//    private List<Spell> spells = new ArrayList<>();
+    @OneToMany
+    @Builder.Default
+    private List<Spell> spells = new ArrayList<>();
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private RpSheet rpSheet;
