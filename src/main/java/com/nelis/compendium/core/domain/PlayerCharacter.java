@@ -1,7 +1,9 @@
 package com.nelis.compendium.core.domain;
 
+import com.nelis.compendium.core.domain.exception.MainSkillNotFound;
 import com.nelis.compendium.core.domain.skills.MainSkill;
 import com.nelis.compendium.core.domain.skills.Skill;
+import com.nelis.compendium.core.domain.skills.SkillType;
 import com.nelis.compendium.core.domain.spells.Spell;
 import jakarta.persistence.*;
 import lombok.*;
@@ -54,6 +56,16 @@ public class PlayerCharacter {
     public String getName() {
         return rpSheet.getName();
     }
+
+    public int getMainSkillModifier(SkillType type) {
+        for (MainSkill mainSkill : mainSkills) {
+            if (mainSkill.getName().equals(type)) {
+                return mainSkill.getModifier();
+            }
+        }
+        throw new MainSkillNotFound(type.name());
+    }
+
 
     @Override
     public final boolean equals(Object o) {

@@ -1,0 +1,27 @@
+package com.nelis.compendium.core.domain.skills;
+
+public enum SkillName {
+    STRENGTH_ST,
+    DEXTERITY_ST,
+    CONSTITUTION_ST,
+    INTELLIGENCE_ST,
+    WISDOM_ST,
+    CHARISMA_ST,
+    ACROBATICS,
+    ANIMAL_HANDLING,
+    ARCANA,
+    DECEPTION,
+    HISTORY,
+    INSIGHT,
+    INTIMIDATION,
+    INVESTIGATION,
+    MEDICINE,
+    NATURE,
+    PERCEPTION,
+    PERFORMANCE,
+    PERSUASION,
+    RELIGION,
+    SLEIGHT_OF_HAND,
+    STEALTH,
+    SURVIVAL
+}

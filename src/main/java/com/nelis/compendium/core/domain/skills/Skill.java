@@ -18,15 +18,26 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-    private String name;
-    private int modifier;
+    @Enumerated(EnumType.STRING)
+    private SkillName name;
+    private int baseModifier;
     @Enumerated(EnumType.STRING)
     private SkillType skillType;
-    private boolean isSavingThrow;
     private boolean isProficient;
     @ManyToOne
     @JoinColumn(name = "player_character_id")
     private PlayerCharacter playerCharacter;
+
+    public boolean isProficient() {
+        return isProficient;
+    }
+
+//    public void triggerProficiency() {
+//    }
+
+    public void setSkillBaseModifiers() {
+        baseModifier = playerCharacter.getMainSkillModifier(getSkillType());
+    }
 
     @Override
     public final boolean equals(Object o) {

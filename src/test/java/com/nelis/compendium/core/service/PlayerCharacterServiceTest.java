@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,7 +48,7 @@ class PlayerCharacterServiceTest {
         spellRepository.deleteAll();
 
         testPlayerCharacter = PlayerCharacter.builder()
-                .name("Test PlayerCharacter")
+                .uuid(UUID.randomUUID())
                 .build();
 
         Inventory testInventory = Inventory.builder()
