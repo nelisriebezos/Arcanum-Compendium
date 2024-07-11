@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import static com.nelis.compendium.core.domain.skills.SkillName.ACROBATICS;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -47,8 +48,15 @@ class PlayerCharacterServiceTest {
         playerCharacterRepository.deleteAll();
         spellRepository.deleteAll();
 
+        Skill acrobatics = Skill.builder()
+                .name(ACROBATICS)
+                .modifier(2)
+                .isProficient(false)
+                .build();
+
         testPlayerCharacter = PlayerCharacter.builder()
                 .uuid(UUID.randomUUID())
+                .proficiencyBonus(2)
                 .build();
 
         Inventory testInventory = Inventory.builder()
@@ -67,20 +75,17 @@ class PlayerCharacterServiceTest {
                 .playerCharacter(testPlayerCharacter)
                 .build();
 
-        Skill testSkill = Skill.builder()
-                .playerCharacter(testPlayerCharacter)
-                .build();
-
         HealthStatus testHealthStatus = HealthStatus.builder()
                 .build();
 
         testSpell = spellRepository.save(testSpell);
 
+        acrobatics.setPlayerCharacter(testPlayerCharacter);
         testPlayerCharacter.setInventory(testInventory);
         testPlayerCharacter.setSpells(List.of(testSpell));
         testPlayerCharacter.setRpSheet(testRpSheet);
         testPlayerCharacter.setMainSkills(Set.of(testMainStat));
-        testPlayerCharacter.setSkills(Set.of(testSkill));
+        testPlayerCharacter.setSkills(Set.of(acrobatics));
         testPlayerCharacter.setHealthStatus(testHealthStatus);
 
 
@@ -127,5 +132,16 @@ class PlayerCharacterServiceTest {
         assertEquals(0, skillRepository.count());
         assertEquals(0, healthStatusRepository.count());
         assertEquals(1, spellRepository.count());
+    }
+
+    @Test
+    void triggerProficiency() {
+        playerCharacterService.triggerProficiency(testPlayerCharacter, ACROBATICS);
+        assertTrue(testPlayerCharacter.getSkillByName(ACROBATICS).isProficient());
+        assertEquals(4, testPlayerCharacter.getSkillByName(ACROBATICS).getModifier());
+
+        playerCharacterService.triggerProficiency(testPlayerCharacter, ACROBATICS);
+        assertFalse(testPlayerCharacter.getSkillByName(ACROBATICS).isProficient());
+        assertEquals(2, testPlayerCharacter.getSkillByName(ACROBATICS).getModifier());
     }
 }

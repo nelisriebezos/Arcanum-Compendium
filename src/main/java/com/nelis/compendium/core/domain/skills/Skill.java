@@ -20,7 +20,7 @@ public class Skill {
     private UUID uuid;
     @Enumerated(EnumType.STRING)
     private SkillName name;
-    private int baseModifier;
+    private int modifier;
     @Enumerated(EnumType.STRING)
     private SkillType skillType;
     private boolean isProficient;
@@ -32,11 +32,18 @@ public class Skill {
         return isProficient;
     }
 
-//    public void triggerProficiency() {
-//    }
+    public void triggerProficiency() {
+        if (!isProficient) {
+            isProficient = true;
+            modifier += playerCharacter.getProficiencyBonus();
+        } else {
+            isProficient = false;
+            modifier -= playerCharacter.getProficiencyBonus();
+        }
+    }
 
     public void setSkillBaseModifiers() {
-        baseModifier = playerCharacter.getMainSkillModifier(getSkillType());
+        modifier = playerCharacter.getMainSkillModifier(getSkillType());
     }
 
     @Override
