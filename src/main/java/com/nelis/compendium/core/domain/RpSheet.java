@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import static com.nelis.compendium.core.domain.Alignment.TRUE_NEUTRAL;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,29 +21,29 @@ public class RpSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-    private String name;
-    private String race;
+    private String name = "";
+    private String race = "";
     @ElementCollection
     @Builder.Default
     private List<String> personalityTraits = new ArrayList<>();
-    private String ideals;
-    private String bonds;
-    private String flaws;
-    private String eyeColour;
-    private String backstory;
-    private String hairColour;
+    private String ideals = "";
+    private String bonds = "";
+    private String flaws = "";
+    private String eyeColour = "";
+    private String backstory = "";
+    private String hairColour = "";
     @ElementCollection
     @Builder.Default
     private List<String> organizations = new ArrayList<>();
-    private String skinColour;
-    private int weight;
-    private int height;
-    private int age;
+    private String skinColour = "";
+    private int weight = 0;
+    private int height = 0;
+    private int age = 0;
     @ElementCollection
     @Builder.Default
     private List<String> languages = new ArrayList<>();
     @Enumerated(EnumType.STRING)
-    private Alignment alignment;
+    private Alignment alignment = TRUE_NEUTRAL;
 
     @Override
     public final boolean equals(Object o) {

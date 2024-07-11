@@ -21,8 +21,8 @@ public class MainSkill {
     @Enumerated(EnumType.STRING)
     private SkillType name;
     @Column(name = "main_skill_value")
-    private int value;
-    private int modifier;
+    private int value = 0;
+    private int modifier = 0;
     @ManyToOne
     @JoinColumn(name = "player_character_uuid")
     private PlayerCharacter playerCharacter;

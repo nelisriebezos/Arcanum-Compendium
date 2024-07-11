@@ -48,11 +48,11 @@ public class PlayerCharacter {
     @OneToOne(cascade = CascadeType.ALL)
     private HealthStatus healthStatus;
 
-    private String playerClass;
-    private int speed;
-    private int level;
-    private int proficiencyBonus;
-    private int initiative;
+    private String playerClass = "";
+    private int speed = 0;
+    private int level = 0;
+    private int proficiencyBonus = 0;
+    private int initiative = 0;
 
     public String getName() {
         return rpSheet.getName();

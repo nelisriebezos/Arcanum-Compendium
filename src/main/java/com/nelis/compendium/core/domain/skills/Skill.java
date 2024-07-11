@@ -20,10 +20,10 @@ public class Skill {
     private UUID uuid;
     @Enumerated(EnumType.STRING)
     private SkillName name;
-    private int modifier;
+    private int modifier = 0;
     @Enumerated(EnumType.STRING)
     private SkillType skillType;
-    private boolean isProficient;
+    private boolean isProficient = false;
     @ManyToOne
     @JoinColumn(name = "player_character_id")
     private PlayerCharacter playerCharacter;

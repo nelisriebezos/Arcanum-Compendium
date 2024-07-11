@@ -45,11 +45,11 @@ public class Inventory {
             mappedBy = "inventory")
     @Builder.Default
     private List<Tool> tools = new ArrayList<>();
-    private int copper;
-    private int silver;
-    private int electrum;
-    private int gold;
-    private int platinum;
+    private int copper = 0;
+    private int silver = 0;
+    private int electrum = 0;
+    private int gold = 0;
+    private int platinum = 0;
 
     @Override
     public final boolean equals(Object o) {

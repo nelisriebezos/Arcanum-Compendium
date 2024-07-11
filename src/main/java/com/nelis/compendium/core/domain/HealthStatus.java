@@ -17,14 +17,14 @@ public class HealthStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-    private int armorClass;
-    private int hp;
-    private int maxHp;
-    private int tempHp;
-    private int posDeathSaves;
-    private int negDeathSaves;
-    private String hitDice;
-    private int availableHitDice;
+    private int armorClass = 0;
+    private int hp = 0;
+    private int maxHp = 0;
+    private int tempHp = 0;
+    private int posDeathSaves = 0;
+    private int negDeathSaves = 0;
+    private String hitDice = "";
+    private int availableHitDice = 0;
 
     @Override
     public final boolean equals(Object o) {
