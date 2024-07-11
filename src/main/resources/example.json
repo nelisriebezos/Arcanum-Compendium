@@ -1,0 +1,27 @@
+{
+  "baseSkill": "Strength",
+  "baseValue": 16,
+  "baseModifier": 2,
+  "skills": [
+    {
+      "name": "Athletics",
+      "modifier": 2,
+      "isProficient": true
+    },
+    {
+      "name": "Climb",
+      "modifier": 2,
+      "isProficient": false
+    },
+    {
+      "name": "Jump",
+      "modifier": 2,
+      "isProficient": true
+    },
+    {
+      "name": "Swim",
+      "modifier": 2,
+      "isProficient": false
+    }
+  ]
+}
