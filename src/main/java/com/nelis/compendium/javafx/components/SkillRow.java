@@ -18,6 +18,14 @@ public class SkillRow {
         this.proficient = proficient;
     }
 
+    public SkillRow(String name, String value, String modifier) {
+        this(name, value, modifier, false);
+    }
+
+    public SkillRow(String name, String modifier, boolean proficient) {
+        this(name, "", modifier, proficient);
+    }
+
     public String getName() {
         return name.get();
     }

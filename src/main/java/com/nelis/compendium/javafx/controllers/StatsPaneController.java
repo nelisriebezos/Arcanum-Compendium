@@ -1,17 +1,14 @@
 package com.nelis.compendium.javafx.controllers;
 
 import com.nelis.compendium.core.service.PlayerCharacterService;
-import com.nelis.compendium.javafx.components.SkillRow;
 import com.nelis.compendium.javafx.dtos.MainSkillDTO;
 import com.nelis.compendium.javafx.dtos.SubSkillDTO;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.geometry.Orientation;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.springframework.stereotype.Component;
 
@@ -55,61 +52,53 @@ public class StatsPaneController {
         };
     }
 
-    private void updateSkillBox(List<MainSkillDTO> mainSkillData) {
-        TableView<SkillRow> tableView = new TableView<>();
-        tableView.setPrefHeight(700.0);
-        tableView.setPrefWidth(1000.0);
+    private SplitPane createSkillTable(MainSkillDTO dto) {
+        SplitPane tablePane = new SplitPane();
+        tablePane.setOrientation(Orientation.VERTICAL);
 
-        // Define columns for main skill
-        TableColumn<SkillRow, String> skillNameColumn = new TableColumn<>("Skill Name");
-        skillNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        skillNameColumn.setPrefWidth(200.0);
+        AnchorPane mainSkillPane = new AnchorPane();
+        HBox mainSkillRow = new HBox();
 
-        TableColumn<SkillRow, String> skillValueColumn = new TableColumn<>("Value");
-        skillValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        skillValueColumn.setPrefWidth(100.0);
+        String plusMinusForSkill = " ";
+        if (dto.baseModifier() > 0) plusMinusForSkill = " +";
 
-        TableColumn<SkillRow, String> skillModifierColumn = new TableColumn<>("Modifier");
-        skillModifierColumn.setCellValueFactory(new PropertyValueFactory<>("modifier"));
-        skillModifierColumn.setPrefWidth(100.0);
+        Label mainSkillName = new Label(dto.name());
+        Label mainSkillValue = new Label(plusMinusForSkill + dto.baseValue());
+        Label mainSkillModifier = new Label(plusMinusForSkill + dto.baseModifier());
 
-        // Define columns for sub-skills
-        TableColumn<SkillRow, CheckBox> proficiencyColumn = new TableColumn<>("Proficient");
-        proficiencyColumn.setCellValueFactory(param -> {
-            SkillRow skillRow = param.getValue();
-            CheckBox checkBox = new CheckBox();
-            checkBox.setSelected(skillRow.isProficient());
-            checkBox.setOnAction(event -> System.out.println("you clicked button"));
-            return new javafx.beans.property.SimpleObjectProperty<>(checkBox);
-        });
-        proficiencyColumn.setPrefWidth(100.0);
+        mainSkillRow.getChildren().addAll(mainSkillName, mainSkillValue, mainSkillModifier);
+        mainSkillPane.getChildren().add(mainSkillRow);
 
-        // Add columns to the table
-        tableView.getColumns().add(skillNameColumn);
-        tableView.getColumns().add(skillValueColumn);
-        tableView.getColumns().add(skillModifierColumn);
-        tableView.getColumns().add(proficiencyColumn);
+        AnchorPane subSkillPane = new AnchorPane();
+        VBox subSkillList = new VBox();
 
-        // Create an observable list for the table data
-        ObservableList<SkillRow> skillRows = FXCollections.observableArrayList();
+        for (SubSkillDTO subSkill : dto.subSkills()) {
+            String plusMinusForSubSkill = " ";
+            if (dto.baseModifier() > 0) plusMinusForSubSkill = " +";
 
-        // Populate the table data
-        for (MainSkillDTO mainSkill : mainSkillData) {
-            String plusMinus = mainSkill.baseModifier() > 0 ? " +" : "" + mainSkill.baseModifier();
-            skillRows.add(new SkillRow(mainSkill.name(), String.valueOf(mainSkill.baseValue()), plusMinus + mainSkill.baseModifier(), false));
+            HBox skillRow = new HBox();
+            Label subSkillName = new Label(subSkill.name());
+            Label subSkillValue = new Label(plusMinusForSubSkill + subSkill.modifier());
+            CheckBox proficiencyButton = new CheckBox();
+            if (subSkill.isProficient()) proficiencyButton.setSelected(true);
+            proficiencyButton.setOnAction(event -> System.out.println("you clicked button"));
 
-            for (SubSkillDTO subSkill : mainSkill.subSkills()) {
-                String plusMinusForSkill = subSkill.modifier() > 0 ? " +" : "" + subSkill.modifier();
-                skillRows.add(new SkillRow(subSkill.name(), plusMinusForSkill + subSkill.modifier(), "", subSkill.isProficient()));
-            }
+            skillRow.getChildren().addAll(subSkillName, subSkillValue, proficiencyButton);
+            subSkillList.getChildren().add(skillRow);
         }
 
-        // Set the table data
-        tableView.setItems(skillRows);
+        subSkillPane.getChildren().add(subSkillList);
 
-        // Clear any existing children and add the table view
-        skillsList.getChildren().clear();
-        skillsList.getChildren().add(tableView);
+        tablePane.getItems().add(mainSkillPane);
+        tablePane.getItems().add(subSkillPane);
+        return tablePane;
+    }
+
+    private void updateSkillBox(List<MainSkillDTO> mainSkillData) {
+        for (MainSkillDTO dto : mainSkillData) {
+            SplitPane table = createSkillTable(dto);
+            skillsList.getChildren().add(table);
+        }
 
 //        for (MainSkillDTO mainSkill : mainSkillData) {
 //            String plusMinus = " ";
@@ -128,7 +117,7 @@ public class StatsPaneController {
 //            Label mainSkillValue = new Label("" + mainSkill.baseValue());
 //            mainSkillValue.setStyle("-fx-font-weight: bold; -fx-padding: 0 10 0 0;");
 //
-//            Label mainSkillModifier = new Label("" + mainSkill.baseModifier());
+//            Label mainSkillModifier = new Label(plusMinus + mainSkill.baseModifier());
 //            mainSkillModifier.setStyle("-fx-font-weight: bold; -fx-padding: 0 10 0 0;");
 //
 //            mainSkillRow.getChildren().addAll(mainSkillName, mainSkillValue, mainSkillModifier);
