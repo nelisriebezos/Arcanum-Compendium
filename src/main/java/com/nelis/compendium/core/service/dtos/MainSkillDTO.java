@@ -1,4 +1,4 @@
-package com.nelis.compendium.javafx.dtos;
+package com.nelis.compendium.core.service.dtos;
 
 import java.util.List;
 

@@ -26,6 +26,17 @@ public class HealthStatus {
     private String hitDice = "";
     private int availableHitDice = 0;
 
+    public HealthStatus(int armorClass, int hp, int maxHp, int tempHp, int posDeathSaves, int negDeathSaves, String hitDice, int availableHitDice) {
+        this.armorClass = armorClass;
+        this.hp = hp;
+        this.maxHp = maxHp;
+        this.tempHp = tempHp;
+        this.posDeathSaves = posDeathSaves;
+        this.negDeathSaves = negDeathSaves;
+        this.hitDice = hitDice;
+        this.availableHitDice = availableHitDice;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

@@ -54,6 +54,14 @@ public class PlayerCharacter {
     private int proficiencyBonus = 0;
     private int initiative = 0;
 
+    public PlayerCharacter(String playerClass, int speed, int level, int proficiencyBonus, int initiative) {
+        this.playerClass = playerClass;
+        this.speed = speed;
+        this.level = level;
+        this.proficiencyBonus = proficiencyBonus;
+        this.initiative = initiative;
+    }
+
     public String getName() {
         return rpSheet.getName();
     }
@@ -65,6 +73,17 @@ public class PlayerCharacter {
             }
         }
         throw new SkillNotFound(type.name());
+    }
+
+//    TODO: test
+    public List<Skill> getSkillsByType(SkillType type) {
+        List<Skill> skillsByType = new ArrayList<>();
+        for (Skill skill : skills) {
+            if (skill.getSkillType().equals(type)) {
+                skillsByType.add(skill);
+            }
+        }
+        return skillsByType;
     }
 
     public Skill getSkillByName(SkillName skillName) {

@@ -27,6 +27,12 @@ public class MainSkill {
     @JoinColumn(name = "player_character_uuid")
     private PlayerCharacter playerCharacter;
 
+    public MainSkill(SkillType name, int value, PlayerCharacter playerCharacter) {
+        this.name = name;
+        this.value = value;
+        this.playerCharacter = playerCharacter;
+    }
+
     public void calculateSkillModifier() {
         if (value == 1) setModifier(-5);
         else if (value > 1 && value < 4) setModifier(-4);

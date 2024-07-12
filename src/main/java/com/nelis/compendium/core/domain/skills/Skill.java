@@ -28,6 +28,17 @@ public class Skill {
     @JoinColumn(name = "player_character_id")
     private PlayerCharacter playerCharacter;
 
+    public Skill(SkillName name, SkillType skillType, boolean isProficient, PlayerCharacter playerCharacter) {
+        this.name = name;
+        this.skillType = skillType;
+        this.isProficient = isProficient;
+        this.playerCharacter = playerCharacter;
+        setSkillBaseModifiers();
+        if (isProficient) {
+            modifier += playerCharacter.getProficiencyBonus();
+        }
+    }
+
     public boolean isProficient() {
         return isProficient;
     }
